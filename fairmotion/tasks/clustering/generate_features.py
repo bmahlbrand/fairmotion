@@ -150,13 +150,14 @@ def wrapper_extract_features(inputs):
     filepath = inputs[0]
     feature_type = inputs[1]
     up_vec = inputs[2]
-
+    output_folder = inputs[3]
+    
     features = extract_features(filepath, feature_type, thresholds, up_vec)
     filename = filepath.split("/")[-1]
     with open(
-        os.path.join(args.output_folder, "features.tsv"), "a",
+        os.path.join(output_folder, "features.tsv"), "a",
     ) as all_features:
-        if args.type == "manual":
+        if feature_type == "manual":
             all_features.write(
                 filename
                 + ":"
@@ -185,7 +186,7 @@ def main(args):
         pool.map(
             wrapper_extract_features,
             [
-                (os.path.join(root, filename), args.type, args.up_vec)
+                (os.path.join(root, filename), args.type, args.up_vec, args.output_folder)
                 for filename in files
             ],
         )
