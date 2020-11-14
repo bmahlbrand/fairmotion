@@ -20,7 +20,7 @@ To generate feature vectors for each motion sequence from a dataset, use the `ge
 python fairmotion/tasks/clustering/generate_features \
     --folder $PATH_TO_BVH_DATASET \
     --output-folder $PATH_TO_STORE_FEATURE_FILES \
-    --features kinetic
+    --type kinetic
 ```
 We can cluster the feature vectors from the previous step using `clustering.py`. We use the `sklearn.cluster` module to provide several clustering techniques -- `kmeans`, `hierarchical`, `optics` and `dbscan`. We provide additional options to normalize and clip (by percentile) input features. We write results to a csv file. The results contain information about filename, cluster ID, rank within cluster and distance from cluster center.
 ```
